@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">For Chat</string>
+    <string name="forget_your_password">Forget your Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="password">Password</string>
+    <string name="mobile">Mobile</string>
+    <string name="sign_in_to_your_account">Sign in to your account</string>
+    <string name="welcome_back">欢迎回来</string>
+</resources>
