@@ -6,4 +6,13 @@
     <string name="mobile">Mobile</string>
     <string name="sign_in_to_your_account">Sign in to your account</string>
     <string name="welcome_back">欢迎回来</string>
+    <string name="register">注册</string>
+    <string name="welcome_to_register">欢迎注册</string>
+    <string name="register_your_account">Register your account</string>
+    <string name="register_now">Register now</string>
+    <string name="login">Login</string>
+    <string name="received_say">received_say</string>
+    <string name="sent_profile">sent_profile</string>
+    <string name="received_profile">received_profile</string>
+    <string name="sent_message">sent_message</string>
 </resources>
