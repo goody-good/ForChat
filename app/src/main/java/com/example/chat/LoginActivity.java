@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             boolean login=myDBhelper.login(s,s1);
             if(login){
                 Toast.makeText(this,"登录成功！",Toast.LENGTH_LONG).show();
-                Intent i=new Intent(this, MainActivity2.class);
+                Intent i=new Intent(this, MainActivity.class);
                 startActivity(i);
             }else{
                 Toast.makeText(this,"登录失败！",Toast.LENGTH_LONG).show();
