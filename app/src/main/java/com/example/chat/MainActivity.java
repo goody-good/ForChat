@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
+
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
     // 定义扩展ExpandableListView 所需要变量
     private ExpandableListView expandablelistview;
     private MyExpandAdapter myExpandAdapter;
+    private MyDBhelper myDBhelper;
     // 好友群组名称设定
     // 群组名称
     private String[] groupName = new String[]{"在线好友", "大学", "中学"};
@@ -42,11 +44,12 @@ public class MainActivity extends AppCompatActivity {
                 String childName1=MainActivity.this.childName[groupPosition][childPosition];
                 if(groupName1.equals("在线好友")){
                     if(childName1.equals("Lily")){
+                        //myMessage message=(myMessage)ChatAdapter.getItem(groupPosition,childPosition)
                         Intent intent =new Intent(MainActivity.this,LilyActivity.class);
+                        startActivity(intent);
                     }
-
                 }
-                return false;
+                return true;
             }
         });
     }

@@ -16,9 +16,6 @@
             android:name=".LilyActivity"
             android:exported="false" />
         <activity
-            android:name=".ChatActivity"
-            android:exported="false" />
-        <activity
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
