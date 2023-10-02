@@ -24,7 +24,7 @@ public class LilyDBhelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table Lilymessage(id interger primary key autoincrement,content text)");
+        db.execSQL("create table Lilymessage(id integer primary key autoincrement,content text)");
     }
 
     //对Lilymessage表的增删改查

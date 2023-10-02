@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="输入消息"
@@ -37,9 +37,5 @@
             android:layout_height="wrap_content"
             android:id="@+id/button_send_Image"
             android:text="发送图片"/>
-
-
     </LinearLayout>
-
-
 </LinearLayout>
