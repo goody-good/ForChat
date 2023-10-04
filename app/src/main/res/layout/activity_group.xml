@@ -14,13 +14,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/background_for_chat_headline"
         android:orientation="horizontal">
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_me"
             android:layout_width="34dp"
             android:layout_height="34dp"
+            android:layout_marginRight="5dp"
             android:layout_marginTop="3dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
             android:layout_marginLeft="5dp"
-            android:src="@drawable/add"
-            android:id="@+id/add_button"/>
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/profile_tomato" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -30,17 +36,53 @@
             android:gravity="center"
             android:id="@+id/chat_headline_text"/>
         <ImageView
-            android:id="@+id/search_button"
             android:layout_width="34dp"
             android:layout_height="34dp"
-            android:layout_marginRight="5dp"
             android:layout_marginTop="3dp"
-            android:src="@drawable/search"/>
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/add"
+            android:id="@+id/add_button"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:id="@+id/search_group"
+        android:background="#EFEFEF"
+        app:layout_constraintTop_toBottomOf="@id/header_layout"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/message_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/border_for_send"
+            android:gravity="center_vertical"
+            android:hint="输入消息"
+            android:paddingStart="7dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp" />
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="32dp"
+            android:id="@+id/send_button"
+            android:background="@drawable/sfc3"
+            android:padding="5dp"
+            android:gravity="center"
+            android:layout_marginEnd="10dp"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:text="搜 索"/>
     </LinearLayout>
     <ExpandableListView
         android:id="@+id/elv"
         android:layout_width="match_parent"
-        app:layout_constraintTop_toBottomOf="@id/header_layout"
+        app:layout_constraintTop_toBottomOf="@id/search_group"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_height="0dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

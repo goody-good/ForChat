@@ -13,15 +13,17 @@ public class MyExpandAdapter extends BaseExpandableListAdapter {
     private String[][] childName;
     private int[] groupPic;
     private int[][] childPic;
+    private String[][] user_motto;
 
     LayoutInflater inflater;
 
-    public MyExpandAdapter(Context context, String[] groupName, String[][] childName, int[] groupPic, int[][] childPic) {
+    public MyExpandAdapter(Context context, String[] groupName, String[][] childName, int[] groupPic, int[][] childPic,String[][] user_motto) {
         this.inflater = LayoutInflater.from(context);
         this.groupName = groupName;
         this.childName = childName;
         this.groupPic = groupPic;
         this.childPic = childPic;
+        this.user_motto=user_motto;
     }
 
     @Override
@@ -42,6 +44,10 @@ public class MyExpandAdapter extends BaseExpandableListAdapter {
     @Override
     public Object getChild(int groupPosition, int childPosition) {
         return childName[groupPosition][childPosition];
+    }
+
+    public Object getUser_motto(int groupPosition, int childPosition ) {
+        return user_motto[groupPosition][childPosition];
     }
 
     @Override
@@ -76,6 +82,8 @@ public class MyExpandAdapter extends BaseExpandableListAdapter {
         nickTextView.setText(getChild(groupPosition, childPosition).toString());
         ImageView imageView = convertView.findViewById(R.id.imageView2);
         imageView.setImageResource(childPic[groupPosition][childPosition]);
+        TextView mottoTextView=convertView.findViewById(R.id.user_motto);
+        mottoTextView.setText(getUser_motto(groupPosition,childPosition).toString());
         return convertView;
     }
 

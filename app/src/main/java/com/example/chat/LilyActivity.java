@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -67,14 +69,31 @@ public class LilyActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean flag = dbhelper.deleteAllData(TABLE_NAME);
-                if (flag) {
-                    Toast.makeText(LilyActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
-                    msgList.clear();
-                    init();
-                } else {
-                    Toast.makeText(LilyActivity.this, "删除失败", Toast.LENGTH_SHORT).show();
-                }
+                AlertDialog dialog = null;
+                AlertDialog.Builder builder = new AlertDialog.Builder(LilyActivity.this);
+                builder.setTitle("删除聊天记录")
+                        .setMessage("你真的没有一点留恋吗？")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                boolean flag = dbhelper.deleteAllData(TABLE_NAME);
+                                if (flag) {
+                                    Toast.makeText(LilyActivity.this, "往事随云烟，薄奠", Toast.LENGTH_SHORT).show();
+                                    msgList.clear();
+                                    init();
+                                } else {
+                                    Toast.makeText(LilyActivity.this, "删除失败", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        })
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                dialog = builder.create();
+                dialog.show();
             }
         });
         backButton.setOnClickListener(new View.OnClickListener() {

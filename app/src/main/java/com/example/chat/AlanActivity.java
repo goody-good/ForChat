@@ -1,5 +1,7 @@
 package com.example.chat;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -29,18 +31,19 @@ public class AlanActivity extends AppCompatActivity {
     private EditText editText;
     private ImageView deleteButton;
     private ImageView backButton;
-    private List<LilyMsg> msgList=new ArrayList<>();
+    private List<LilyMsg> msgList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tom);
 
-        headlinetext=findViewById(R.id.chat_headline_text);
-        recyclerView=findViewById(R.id.chat_recycler_view);
-        button_send=findViewById(R.id.send_button);
-        editText=findViewById(R.id.message_edit_text);
-        deleteButton=findViewById(R.id.delete_button);
-        backButton=findViewById(R.id.back_button);
+        headlinetext = findViewById(R.id.chat_headline_text);
+        recyclerView = findViewById(R.id.chat_recycler_view);
+        button_send = findViewById(R.id.send_button);
+        editText = findViewById(R.id.message_edit_text);
+        deleteButton = findViewById(R.id.delete_button);
+        backButton = findViewById(R.id.back_button);
         dbhelper = new ChatDBhelper(AlanActivity.this);
 
         headlinetext.setText("Alan");
@@ -66,14 +69,31 @@ public class AlanActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean flag = dbhelper.deleteAllData(TABLE_NAME);
-                if (flag) {
-                    Toast.makeText(AlanActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
-                    msgList.clear();
-                    init();
-                } else {
-                    Toast.makeText(AlanActivity.this, "删除失败", Toast.LENGTH_SHORT).show();
-                }
+                AlertDialog dialog = null;
+                AlertDialog.Builder builder = new AlertDialog.Builder(AlanActivity.this);
+                builder.setTitle("删除聊天记录")
+                        .setMessage("你真的没有一点留恋吗？")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                boolean flag = dbhelper.deleteAllData(TABLE_NAME);
+                                if (flag) {
+                                    Toast.makeText(AlanActivity.this, "往事随云烟，薄奠", Toast.LENGTH_SHORT).show();
+                                    msgList.clear();
+                                    init();
+                                } else {
+                                    Toast.makeText(AlanActivity.this, "删除失败", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        })
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                dialog = builder.create();
+                dialog.show();
             }
         });
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +105,7 @@ public class AlanActivity extends AppCompatActivity {
         });
         init();
     }
+
     private void init() {
         getLatestMessageList();
         setupAdapter();
@@ -94,6 +115,7 @@ public class AlanActivity extends AppCompatActivity {
         msgList.clear();
         msgList.addAll(dbhelper.query(TABLE_NAME));
     }
+
     private void setupAdapter() {
         if (adapter == null) {
             adapter = new ChatAdapter(AlanActivity.this);

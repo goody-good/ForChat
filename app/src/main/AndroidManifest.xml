@@ -28,9 +28,6 @@
             android:name=".TomActivity"
             android:exported="false" />
         <activity
-            android:name=".BaseChatActivity"
-            android:exported="false" />
-        <activity
             android:name=".JackActivity"
             android:exported="false" />
         <activity

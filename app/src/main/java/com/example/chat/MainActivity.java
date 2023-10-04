@@ -25,14 +25,16 @@ public class MainActivity extends AppCompatActivity {
     private int[][] childPic = new int[][]{{R.drawable.a7, R.drawable.a6},
             {R.drawable.a3, R.drawable.a4, R.drawable.a5},
             {R.drawable.a1, R.drawable.a2}};
-
+    private String[][] User_motto =new String[][]{{"掬水月在手，弄花香盈袖","云青青兮欲雨，水澹澹兮生烟"},
+            {"但屈指西风几时来，却不道，流年暗中偷换","如鹏向海，义无反顾","刚日读经，柔日读史"},
+            {"兰有剑影，不沾血腥","每有一息之差，而成终身之谬"}};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group);
 
         expandablelistview = findViewById(R.id.elv);
-        myExpandAdapter = new MyExpandAdapter(this, groupName, childName, groupPic, childPic);
+        myExpandAdapter = new MyExpandAdapter(this, groupName, childName, groupPic, childPic,User_motto);
         expandablelistview.setAdapter(myExpandAdapter);
 
         expandablelistview.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
