@@ -6,6 +6,7 @@ import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import android.content.Intent;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,12 +16,12 @@ public class MainActivity extends AppCompatActivity {
     private MyDBhelper myDBhelper;
     // 好友群组名称设定
     // 群组名称
-    private String[] groupName = new String[]{"在线好友", "大学", "中学"};
+    private String[] groupName = new String[]{"家人", "大学", "中学"};
     private int[] groupPic = new int[]{R.drawable.g3, R.drawable.g2,
             R.drawable.g1};
     // 好友名称
     private String[][] childName = new String[][]{{"Lily", "Jack"},
-            {"Lily", "老刘", "Tom"}, {"包包", "珊珊"}};
+            {"Alan", "Brian", "Tom"}, {"Bowen", "Frank"}};
     private int[][] childPic = new int[][]{{R.drawable.a7, R.drawable.a6},
             {R.drawable.a3, R.drawable.a4, R.drawable.a5},
             {R.drawable.a1, R.drawable.a2}};
@@ -40,12 +41,34 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),
                         groupName[groupPosition] + ":" + childName[groupPosition][childPosition],
                         Toast.LENGTH_SHORT).show();
-                String groupName1=MainActivity.this.groupName[groupPosition];
-                String childName1=MainActivity.this.childName[groupPosition][childPosition];
-                if(groupName1.equals("在线好友")){
-                    if(childName1.equals("Lily")){
+                String groupName1 = MainActivity.this.groupName[groupPosition];
+                String childName1 = MainActivity.this.childName[groupPosition][childPosition];
+                if (groupName1.equals("家人")) {
+                    if (childName1.equals("Lily")) {
                         //myMessage message=(myMessage)ChatAdapter.getItem(groupPosition,childPosition)
-                        Intent intent =new Intent(MainActivity.this,LilyActivity.class);
+                        Intent intent = new Intent(MainActivity.this, LilyActivity.class);
+                        startActivity(intent);
+                    } else if (childName1.equals("Jack")) {
+                        Intent intent = new Intent(MainActivity.this, JackActivity.class);
+                        startActivity(intent);
+                    }
+                } else if (groupName1.equals("大学")) {
+                    if (childName1.equals("Tom")) {
+                        Intent intent = new Intent(MainActivity.this, TomActivity.class);
+                        startActivity(intent);
+                    } else if (childName1.equals("Alan")) {
+                        Intent intent = new Intent(MainActivity.this, AlanActivity.class);
+                        startActivity(intent);
+                    } else if (childName1.equals("Brian")) {
+                        Intent intent = new Intent(MainActivity.this, BrianActivity.class);
+                        startActivity(intent);
+                    }
+                } else if (groupName1.equals("中学")) {
+                    if (childName1.equals("Bowen")) {
+                        Intent intent = new Intent(MainActivity.this, BowenActivity.class);
+                        startActivity(intent);
+                    } else if (childName1.equals("Frank")) {
+                        Intent intent = new Intent(MainActivity.this, FrankActivity.class);
                         startActivity(intent);
                     }
                 }

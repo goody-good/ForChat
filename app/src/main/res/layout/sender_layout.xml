@@ -5,26 +5,26 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profilerggg"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-        android:src="@drawable/profile_camera" />
+        android:src="@drawable/profile_tomato" />
 
     <TextView
         android:id="@+id/sender_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginEnd="0dp"
         android:layout_marginBottom="5dp"
         android:layout_toLeftOf="@id/profilerggg"
         android:background="@drawable/sender_shape"

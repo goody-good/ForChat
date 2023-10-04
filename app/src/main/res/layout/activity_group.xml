@@ -5,8 +5,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/header_layout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/background_for_chat_headline"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/add"
+            android:id="@+id/add_button"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="30sp"
+            android:text="通讯录"
+            android:gravity="center"
+            android:id="@+id/chat_headline_text"/>
+        <ImageView
+            android:id="@+id/search_button"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/search"/>
+    </LinearLayout>
     <ExpandableListView
         android:id="@+id/elv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        app:layout_constraintTop_toBottomOf="@id/header_layout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

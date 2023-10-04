@@ -13,6 +13,27 @@
         android:theme="@style/Theme.Chat"
         tools:targetApi="31">
         <activity
+            android:name=".FrankActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BowenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BrianActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AlanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TomActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BaseChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".JackActivity"
+            android:exported="false" />
+        <activity
             android:name=".LilyActivity"
             android:exported="false" />
         <activity

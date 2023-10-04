@@ -1,9 +1,5 @@
 package com.example.chat;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,15 +9,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.chat.javabean.LilyMsg;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LilyActivity extends AppCompatActivity {
-    private static final String TABLE_NAME = "Lilymessage";
+public class FrankActivity extends AppCompatActivity {
+    private static final String TABLE_NAME = "Frankmessage";
     private static final String DATABASE_NAME = "Lily.db";
-
     private RecyclerView recyclerView;
     private TextView button_send;
     private TextView headlinetext;
@@ -34,7 +33,7 @@ public class LilyActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lily);
+        setContentView(R.layout.activity_tom);
 
         headlinetext=findViewById(R.id.chat_headline_text);
         recyclerView=findViewById(R.id.chat_recycler_view);
@@ -42,24 +41,24 @@ public class LilyActivity extends AppCompatActivity {
         editText=findViewById(R.id.message_edit_text);
         deleteButton=findViewById(R.id.delete_button);
         backButton=findViewById(R.id.back_button);
-        dbhelper = new ChatDBhelper(LilyActivity.this);
+        dbhelper = new ChatDBhelper(FrankActivity.this);
 
-        headlinetext.setText("Lily");
+        headlinetext.setText("Frank");
 
         button_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String content = editText.getText().toString().trim();
                 if (TextUtils.isEmpty(content)) {
-                    Toast.makeText(LilyActivity.this, "内容为空", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FrankActivity.this, "内容为空", Toast.LENGTH_SHORT).show();
                 } else {
                     boolean flag = dbhelper.insertData(content, TABLE_NAME);
                     if (flag) {
                         editText.setText("");
-                        Toast.makeText(LilyActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FrankActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
                         init();
                     } else {
-                        Toast.makeText(LilyActivity.this, "添加失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FrankActivity.this, "添加失败", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -69,18 +68,18 @@ public class LilyActivity extends AppCompatActivity {
             public void onClick(View view) {
                 boolean flag = dbhelper.deleteAllData(TABLE_NAME);
                 if (flag) {
-                    Toast.makeText(LilyActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FrankActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
                     msgList.clear();
                     init();
                 } else {
-                    Toast.makeText(LilyActivity.this, "删除失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FrankActivity.this, "删除失败", Toast.LENGTH_SHORT).show();
                 }
             }
         });
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LilyActivity.this, MainActivity.class);
+                Intent intent = new Intent(FrankActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -95,10 +94,9 @@ public class LilyActivity extends AppCompatActivity {
         msgList.clear();
         msgList.addAll(dbhelper.query(TABLE_NAME));
     }
-
     private void setupAdapter() {
         if (adapter == null) {
-            adapter = new ChatAdapter(LilyActivity.this);
+            adapter = new ChatAdapter(FrankActivity.this);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(adapter);
         }
