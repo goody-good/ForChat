@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.NonNull;
 
 import com.example.chat.javabean.LilyMsg;
 
@@ -37,6 +38,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         LilyMsg message = messageList.get(position);
         holder.t_content.setText(message.getContent());
+        holder.t_time.setText(message.getTimeStamp());
     }
 
     @Override
@@ -45,11 +47,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView t_content;
+        TextView t_content,t_time;
 
         public ViewHolder(View view) {
             super(view);
             t_content = view.findViewById(R.id.sender_message);
+            t_time=view.findViewById(R.id.sender_time);
         }
     }
 }

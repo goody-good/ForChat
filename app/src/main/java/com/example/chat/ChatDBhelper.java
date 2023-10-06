@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
@@ -11,11 +12,14 @@ import androidx.annotation.Nullable;
 import com.example.chat.javabean.LilyMsg;
 
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Date;
 
 public class ChatDBhelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Lily.db";
     private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_TIME = "time";
     //表名常量
     private static final String TABLE_ACTIVITY_1 = "Lilymessage";
     private static final String TABLE_ACTIVITY_2 = "Jackmessage";
@@ -25,16 +29,14 @@ public class ChatDBhelper extends SQLiteOpenHelper {
     private static final String TABLE_ACTIVITY_6 = "Bowenmessage";
     private static final String TABLE_ACTIVITY_7 = "Frankmessage";
 
-
-
     //创建表的语句
-    private static final String CREATE_TABLE_ACTIVITY_1 = "CREATE TABLE " + TABLE_ACTIVITY_1 + " (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT)";
-    private static final String CREATE_TABLE_ACTIVITY_2 = "CREATE TABLE " + TABLE_ACTIVITY_2 + " (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT)";
-    private static final String CREATE_TABLE_ACTIVITY_3 = "CREATE TABLE " + TABLE_ACTIVITY_3 + " (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT)";
-    private static final String CREATE_TABLE_ACTIVITY_4 = "CREATE TABLE " + TABLE_ACTIVITY_4 + " (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT)";
-    private static final String CREATE_TABLE_ACTIVITY_5 = "CREATE TABLE " + TABLE_ACTIVITY_5 + " (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT)";
-    private static final String CREATE_TABLE_ACTIVITY_6 = "CREATE TABLE " + TABLE_ACTIVITY_6 + " (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT)";
-    private static final String CREATE_TABLE_ACTIVITY_7 = "CREATE TABLE " + TABLE_ACTIVITY_7 + " (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT)";
+    private static final String CREATE_TABLE_ACTIVITY_1 = "CREATE TABLE " + TABLE_ACTIVITY_1 + " (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT,time TEXT)";
+    private static final String CREATE_TABLE_ACTIVITY_2 = "CREATE TABLE " + TABLE_ACTIVITY_2 + " (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT,time TEXT)";
+    private static final String CREATE_TABLE_ACTIVITY_3 = "CREATE TABLE " + TABLE_ACTIVITY_3 + " (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT,time TEXT)";
+    private static final String CREATE_TABLE_ACTIVITY_4 = "CREATE TABLE " + TABLE_ACTIVITY_4 + " (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT,time TEXT)";
+    private static final String CREATE_TABLE_ACTIVITY_5 = "CREATE TABLE " + TABLE_ACTIVITY_5 + " (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT,time TEXT)";
+    private static final String CREATE_TABLE_ACTIVITY_6 = "CREATE TABLE " + TABLE_ACTIVITY_6 + " (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT,time TEXT)";
+    private static final String CREATE_TABLE_ACTIVITY_7 = "CREATE TABLE " + TABLE_ACTIVITY_7 + " (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT,time TEXT)";
 
 
     private SQLiteDatabase db;
@@ -57,10 +59,11 @@ public class ChatDBhelper extends SQLiteOpenHelper {
 
     //对Lilymessage表的增删改查
     //添加数据
-    public boolean insertData(String content,String tablename) {
+    public boolean insertData(String content,String tablename,String time) {
         //保存插入内容
         ContentValues contentValues = new ContentValues();
         contentValues.put("content", content);
+        contentValues.put("time",time);
         long i = db.insert(tablename, null, contentValues);
         return i > 0;
     }
@@ -75,12 +78,16 @@ public class ChatDBhelper extends SQLiteOpenHelper {
         int i = db.delete(tablename,null,null);
         return i>0;
     }
-    //修改数据,根据Id
-//    public boolean updateData(String updateId, Sring updateContent) {
+//    修改数据,根据Id
+//    public boolean updateData(String updateId, Sring updateContent,String tablename) {
 //        //将需要更新的存入contentValues
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 hh:mm:ss");
+//        Date date = new Date(System.currentTimeMillis());
+//        String time = simpleDateFormat.format(date);
 //        ContentValues contentValues = new ContentValues();
 //        contentValues.put("content", updateContent);
-//        db.update("Lilymessage", contentValues, "id=?", new String[]{updateId});
+//        contentValues.put(DATABASE_TIME, time);
+//        db.update(tablename, contentValues, "id=?", new String[]{updateId});
 //    }
 
     //查询数据,将查询内容用Lily对象属性进行存储，并将对象存入集合中
@@ -91,6 +98,7 @@ public class ChatDBhelper extends SQLiteOpenHelper {
             LilyMsg lilyMsg = new LilyMsg();
             lilyMsg.setId(String.valueOf(cursor.getInt(0)));
             lilyMsg.setContent(cursor.getString(1));
+            lilyMsg.setTimeStamp(cursor.getString(2));
             list.add(lilyMsg);
         }
         cursor.close();

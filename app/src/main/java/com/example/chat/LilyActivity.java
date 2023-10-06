@@ -17,12 +17,15 @@ import android.widget.Toast;
 
 import com.example.chat.javabean.LilyMsg;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class LilyActivity extends AppCompatActivity {
     private static final String TABLE_NAME = "Lilymessage";
     private static final String DATABASE_NAME = "Lily.db";
+    private static final String DATABASE_TIME = "time";
 
     private RecyclerView recyclerView;
     private TextView button_send;
@@ -32,6 +35,8 @@ public class LilyActivity extends AppCompatActivity {
     private EditText editText;
     private ImageView deleteButton;
     private ImageView backButton;
+    private TextView t_time_text;
+
     private List<LilyMsg> msgList=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,7 @@ public class LilyActivity extends AppCompatActivity {
         editText=findViewById(R.id.message_edit_text);
         deleteButton=findViewById(R.id.delete_button);
         backButton=findViewById(R.id.back_button);
+        t_time_text=findViewById(R.id.sender_time);
         dbhelper = new ChatDBhelper(LilyActivity.this);
 
         headlinetext.setText("Lily");
@@ -52,13 +58,17 @@ public class LilyActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String content = editText.getText().toString().trim();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+                Date date = new Date(System.currentTimeMillis());
+                String time = simpleDateFormat.format(date);
                 if (TextUtils.isEmpty(content)) {
                     Toast.makeText(LilyActivity.this, "内容为空", Toast.LENGTH_SHORT).show();
                 } else {
-                    boolean flag = dbhelper.insertData(content, TABLE_NAME);
+                    boolean flag = dbhelper.insertData(content, TABLE_NAME,time);
                     if (flag) {
                         editText.setText("");
                         Toast.makeText(LilyActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LilyActivity.this, time, Toast.LENGTH_SHORT).show();
                         init();
                     } else {
                         Toast.makeText(LilyActivity.this, "添加失败", Toast.LENGTH_SHORT).show();

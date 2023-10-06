@@ -11,14 +11,16 @@ import androidx.annotation.Nullable;
 import com.example.chat.javabean.User;
 
 public class MyDBhelper extends SQLiteOpenHelper {
-    private static final String DB_NAME="MYsqlite.db";
+    private static final String DB_NAME = "MYsqlite.db";
     private static final int DATABASE_VERSION = 1;
-    private static final String FRIEND_ID = "FriendId";
-    private static final String CHAT_CONTENT = "Content";
-    private static final String create_users="create table users(mobile varchar(11),password varchar(32))";
-    public MyDBhelper(@Nullable Context context){
-        super(context,DB_NAME,null,DATABASE_VERSION);
+//    private static final String FRIEND_ID = "FriendId";
+//    private static final String CHAT_CONTENT = "Content";
+    private static final String create_users = "create table users(mobile varchar(11),password varchar(32))";
+
+    public MyDBhelper(@Nullable Context context) {
+        super(context, DB_NAME, null, DATABASE_VERSION);
     }
+
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
@@ -29,28 +31,40 @@ public class MyDBhelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
-    public long register(User user){
-        SQLiteDatabase db= getWritableDatabase();
-        ContentValues cv=new ContentValues();
-        cv.put("mobile",user.getMobile());
-        cv.put("password",user.getPassword());
-        long users = db.insert("users",null,cv);
+
+    public long register(User user) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("mobile", user.getMobile());
+        cv.put("password", user.getPassword());
+        long users = db.insert("users", null, cv);
         return users;
     }
-    public boolean login(String mobile,String password){
-        SQLiteDatabase db1=getWritableDatabase();
-        boolean result =false;
-        Cursor users= db1.query("users",null,"mobile=?",new String[]{mobile},null,null,null);
 
-        if(users!=null){
-            while(users.moveToNext()){
+    public boolean login(String mobile, String password) {
+        SQLiteDatabase db1 = getWritableDatabase();
+        boolean result = false;
+        Cursor users = db1.query("users", null, "mobile=?", new String[]{mobile}, null, null, null);
+
+        if (users != null) {
+            while (users.moveToNext()) {
                 String password1 = users.getString(1);
-                result=password1.equals(password);
+                result = password1.equals(password);
                 return result;
             }
         }
         return result;
     }
+
+    public boolean recoverbymobile(String mobile, String password) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("password", password);
+        int i= db.update("users", contentValues, "mobile=?", new String[]{mobile});
+        return i>0;
+    }
+}
+//}
 //    public void addMessage(myMessage myMessage){
 //        SQLiteDatabase db2=getWritableDatabase();
 //        ContentValues values=new ContentValues();
@@ -77,4 +91,4 @@ public class MyDBhelper extends SQLiteOpenHelper {
 //        db.close();
 //        return myMessages;
 //    }
-}
+//}

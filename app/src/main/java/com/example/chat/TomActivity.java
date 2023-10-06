@@ -17,7 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chat.javabean.LilyMsg;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TomActivity extends AppCompatActivity {
@@ -51,10 +53,13 @@ public class TomActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String content = editText.getText().toString().trim();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+                Date date = new Date(System.currentTimeMillis());
+                String time = simpleDateFormat.format(date);
                 if (TextUtils.isEmpty(content)) {
                     Toast.makeText(TomActivity.this, "内容为空", Toast.LENGTH_SHORT).show();
                 } else {
-                    boolean flag = dbhelper.insertData(content, TABLE_NAME);
+                    boolean flag = dbhelper.insertData(content, TABLE_NAME,time);
                     if (flag) {
                         editText.setText("");
                         Toast.makeText(TomActivity.this, "添加成功", Toast.LENGTH_SHORT).show();

@@ -16,12 +16,10 @@
         android:orientation="horizontal">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_me"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="3dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="5dp"
             android:layout_marginEnd="10dp"
@@ -35,13 +33,14 @@
             android:text="通讯录"
             android:gravity="center"
             android:id="@+id/chat_headline_text"/>
+
         <ImageView
-            android:layout_width="34dp"
-            android:layout_height="34dp"
+            android:id="@+id/signout_button"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginRight="5dp"
             android:layout_marginTop="3dp"
-            android:layout_marginLeft="5dp"
-            android:src="@drawable/add"
-            android:id="@+id/add_button"/>
+            android:src="@drawable/signout" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -61,7 +60,7 @@
             android:layout_weight="1"
             android:background="@drawable/border_for_send"
             android:gravity="center_vertical"
-            android:hint="输入消息"
+            android:hint="输入消息……（但是还没弄好）"
             android:paddingStart="7dp"
             android:paddingTop="5dp"
             android:paddingBottom="5dp" />

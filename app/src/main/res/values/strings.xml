@@ -15,4 +15,6 @@
     <string name="sent_profile">sent_profile</string>
     <string name="received_profile">received_profile</string>
     <string name="sent_message">sent_message</string>
+    <string name="recover_the_password">recover the password</string>
+    <string name="recover_now">Recover now</string>
 </resources>

@@ -36,11 +36,15 @@ public class RegisterActivity extends AppCompatActivity {
         User u = new User(s, s1);
         long l = myDBhelper1.register(u);
         if (l != -1) {
-            Toast.makeText(this, "注册成功！", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "注册成功！", Toast.LENGTH_SHORT).show();
             Intent i3 = new Intent(this, LoginActivity.class);
             startActivity(i3);
         } else {
-            Toast.makeText(this, "注册失败！", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "注册失败！", Toast.LENGTH_SHORT).show();
         }
+    }
+    public void fanhui(View view){
+        Intent i = new Intent(this, LoginActivity.class);
+        startActivity(i);
     }
 }
